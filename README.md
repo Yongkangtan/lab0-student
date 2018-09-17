@@ -98,3 +98,70 @@ The noskipws operator may be useful in parsing the input:
 ```c++
 input >> noskipws >> c;
 ```
+
+# Debugging Help
+
+It is important that you use the `gdb` debugger to debug your code
+when you encounter problems. You can easily start the `gdb` debugger
+from the command line:
+
+```bash
+$ gdb PROGRAM
+```
+
+Where `PROGRAM` is the program you compiled. You should look at the
+provided `gdb` cheatsheet to see some of the commands you can
+execute. If you need additional help you can take a look at [this
+tutorial](https://www.cs.cmu.edu/~gilpin/tutorial/).
+
+You will inevitably encounter cases when your code fails a test or
+worse, the test program exits with a segmentation violation
+(segfault). To debug the code in a test requires you to understand how
+the google test framework generates C++ code and how the C++ compiler
+generates method signatures. In short, this is what you want to do:
+
+```bash
+$ gdb TEST_PROGRAM
+(gdb) b TestSuite_TestName_Test::TestBody()
+```
+
+The `SuiteName` and `TestName` correspond to how you write a test
+using the google test framework. In particular, this is the basic
+structure of a test:
+
+```C++
+TEST(SuiteName, TestName) {
+  // the test body
+}
+```
+
+You should also know that the `b` (break) command provides tab
+completion. So, you can type in the following:
+
+```bash
+(gdb) b TestSuite[TAB][TAB]
+```
+
+The `[TAB]` is hitting the `tab` key on your keyboard. You can hit it
+twice in rapid succession to see all the possible completions.
+
+# C++ Resources
+
+This assignment touches on a variety of C++ language concepts and
+libraries that are useful to understand before you get started. The
+following links should help you in your work on this assignment. You
+should take the time to review these resources before and during the
+assignment to help you complete your work:
+
+* [C++ Language Tutorials](http://www.cplusplus.com/doc/tutorial/)
+* [Basic I/O](http://www.cplusplus.com/doc/tutorial/basic_io/)
+* [Namespaces](http://www.cplusplus.com/doc/oldtutorial/namespaces/)
+* [Strings](http://www.cplusplus.com/reference/string/string/)
+* [Map](http://www.cplusplus.com/reference/map/map/)
+* [Set](http://www.cplusplus.com/reference/set/set/)
+* [Queue](http://www.cplusplus.com/reference/queue/queue/)
+
+Again, spend some time studying up on these C++ basics. The best way
+to do this is to write out the examples and compile them to see how
+they work. Spending a little time to prepare will go a long way in
+successfully implementing this assignment.
